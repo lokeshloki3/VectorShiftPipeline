@@ -23,11 +23,9 @@ export const SubmitButton = () => {
         label: edge.label,
       }))
     };
-
-    // Log the data (or send it to an API, etc.)
-    console.log("Submitted Data: ", submissionData);
-    
-    // You can send `submissionData` to an API endpoint or use it as needed.
+    const submissionDataString = JSON.stringify(submissionData);
+    console.log("Submitted Data: ", submissionDataString);
+    // Send `submissionData` to an API endpoint or use it as needed.
   };
 
   return (

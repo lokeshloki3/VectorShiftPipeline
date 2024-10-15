@@ -19,12 +19,7 @@ const selector = (state) => ({
 export const TextNode = ({ id, data, position }) => {
   const {
     nodes,
-    edges,
-    getNodeID,
     addNode,
-    onNodesChange,
-    onEdgesChange,
-    onConnect,
     addEdge,
   } = useStore(selector, shallow);
   
@@ -39,36 +34,29 @@ export const TextNode = ({ id, data, position }) => {
     const matches = currText.match(variablePattern);
 
     if (matches) {
-      matches.forEach((match, index) => {
-        
+      matches.forEach((match) => {
         const variableName = match.slice(2, -2).trim();
-        const newNodeId = `newNode-${match}--${id}`;
+        const newNodeId = `variableNode-${variableName}--${id}`;
 
-        let alreadyExistingNode = false;
-        nodes.map(node => {
-          if(node.id == newNodeId){
-            alreadyExistingNode=true
-          }
-        })
-        if(!alreadyExistingNode){
-        addNode({
-          id: newNodeId,
-          type: 'text',
-          position: { x: data.position.x-300, y: data.position.y },
-          data: {
-            type: "text",
-            value: { currText: variableName }, 
-            // onVariableNodeAddition: data.onVariableNodeAddition,
-            // position: { x: data.position.x-300, y: data.position.y }
-          },
-        });
+        const alreadyExistingNode = nodes.some(node => node.id === newNodeId);
+        if (!alreadyExistingNode) {
+          addNode({
+            id: newNodeId,
+            type: 'variable',
+            position: { x: data.position.x - 300, y: data.position.y },
+            data: {
+              type: "variable",
+              label: variableName, // Pass the variable name as label
+              value: { currText: variableName }, 
+            },
+          });
 
-        addEdge({
-          id: 'e'+newNodeId+"-"+id,
-          source: newNodeId,
-          target: id
-        })
-      }
+          addEdge({
+            id: 'e' + newNodeId + "-" + id,
+            source: newNodeId,
+            target: id
+          });
+        }
       });
     } else {
       alert('Enter inside {{...}} to create variables.');
@@ -100,9 +88,6 @@ export const TextNode = ({ id, data, position }) => {
             onBlur={handleCreateNewNode}
           />
         </label>
-        {/* <button onClick={handleCreateNewNode} className='ml-16 mt-2 px-1 py-1 bg-blue-100 border-b-2 border-black rounded-xl w-32'>
-          Create Variables
-        </button> */}
       </div>
     </AbstractNode>
   );

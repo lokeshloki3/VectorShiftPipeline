@@ -30,7 +30,6 @@ export const InputNode = ({ id, data }) => {
 
   return (
     <AbstractNode
-      onVariableNodeAddition={data.onVariableNodeAddition}
       id={id}
       title='Input'
       nodeType="Input"

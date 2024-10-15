@@ -12,7 +12,7 @@ import { NotificationNode } from './nodes/notificationNode';
 import { MergeNode } from './nodes/mergeNode';
 import { DecisionNode } from './nodes/decisionNode';
 import { ProcessingNode } from './nodes/processingNode';
-import DefaultNode from './nodes/defaultNode';
+import VariableNode from './nodes/variableNode';
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
@@ -25,7 +25,7 @@ const nodeTypes = {
   merge: MergeNode,
   decision: DecisionNode,
   processing: ProcessingNode,
-  default: DefaultNode,
+  variable: VariableNode,
 };
 
 const selector = (state) => ({

@@ -5,7 +5,7 @@ import { DraggableNode } from './draggableNode';
 export const PipelineToolbar = () => {
 
     return (
-        <div style={{ padding: '10px' }} className="bg-pink-200">
+        <div className="bg-pink-200 p-3">
             <h1 className='text-center font-extrabold text-2xl text-pink-950 '>Design PipelineUI</h1>
             <div className='flex'>
                 <div className='mt-8 mr-6 font-bold text-pink-950 text-xl'>Drag Nodes -</div>
@@ -18,7 +18,7 @@ export const PipelineToolbar = () => {
                     <DraggableNode type='decision' label='Decision' />
                     <DraggableNode type='processing' label='Processing' />
                     <DraggableNode type='merge' label='Merge' />
-                    <DraggableNode type='default' label='Default' />
+                    {/* <DraggableNode type='variable' label='Variable' /> */}
                 </div>
             </div>
         </div>
