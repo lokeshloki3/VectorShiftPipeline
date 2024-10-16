@@ -46,7 +46,7 @@ export const TextNode = ({ id, data, position }) => {
             position: { x: data.position.x - 300, y: data.position.y },
             data: {
               type: "variable",
-              label: variableName, // Pass the variable name as label
+              label: variableName,
               value: { currText: variableName }, 
             },
           });

@@ -10,15 +10,16 @@ const VariableNode = ({ id, data }) => {
   return (
     <AbstractNode
       id={id}
-      nodeType="Variable" // Update the node type if needed
+      nodeType="Variable"
       handles={handles}
-      title="Variable"// Set the title to the dynamic label
+      title="Variable"
       inputFields={[]}
       outputFields={[]}
     >
       <div className='text-center flex flex-col'>
         <label>
-          {data.label || "Text"}: {/* Display the dynamic label */}
+          {/* Display the dynamic label and initially Text*/}
+          {data.label || "Text"}: 
           <input
             type="text"
             className='text-center'

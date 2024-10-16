@@ -30,22 +30,12 @@ const AbstractNode = ({
         <span className=' font-bold '>{title}</span>
       </div>
       <div className='p-1 text-blue-700 text-center'>
-        {inputFields.map((inputField, index) => {
-          let style = {}
-          if(inputField.value.length < 5){
-            style["width"] = "5ch"
-          }else if(inputField.value.length > 40){
-            style["width"] = "40ch"
-          }else{
-            style["width"] = inputField.value.length+"ch"
-          }
-
-          return <div key={`input-${index}`}>
+        {inputFields.map((inputField, index) => (
+          <div key={`input-${index}`}>
             <label>
               {inputField.label}:
               <input
                 className='text-center text-pink-700 rounded-md p-1 mt-1'
-                style={style}
                 type={inputField.type}
                 value={inputField.value}
                 onChange={(e) => {
@@ -54,7 +44,7 @@ const AbstractNode = ({
               />
             </label>
           </div>
-        })}
+        ))}
       </div>
       <div className='text-blue-700 text-center'>
         {outputFields.map((outputField, index) => (

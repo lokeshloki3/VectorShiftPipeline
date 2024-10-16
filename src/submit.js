@@ -1,5 +1,5 @@
-// submit.js
 import { useStore } from './store'; // Import store to get nodes and edges
+import React from 'react';
 
 export const SubmitButton = () => {
   const { nodes, edges } = useStore((state) => ({
@@ -7,7 +7,7 @@ export const SubmitButton = () => {
     edges: state.edges,
   }));
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Structure the submission data
     const submissionData = {
       nodes: nodes.map(node => ({
@@ -21,11 +21,32 @@ export const SubmitButton = () => {
         source: edge.source,
         target: edge.target,
         label: edge.label,
-      }))
+      })),
     };
+    
     const submissionDataString = JSON.stringify(submissionData);
-    console.log("Submitted Data: ", submissionDataString);
-    // Send `submissionData` to an API endpoint or use it as needed.
+    // console.log("Submitted Data: ", submissionDataString);
+    
+    // Send submissionData to an API endpoint or use it as needed.
+    try {
+      const response = await fetch('https://d0d29c95-0c93-48ca-8424-ad4b9939facd.mock.pstmn.io/pipelines/parse', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: submissionDataString,
+      });
+
+      const data = await response.json();
+      console.log(data);
+      
+      const { num_nodes, num_edges, is_dag } = data;
+      const alertMessage = `Number of Nodes: ${num_nodes}\nNumber of Edges: ${num_edges}\nIs Directed Acyclic Graph (DAG): ${is_dag}`;
+      alert(alertMessage);
+
+    } catch (error) {
+      console.error('Error submitting data:', error);
+    }
   };
 
   return (
