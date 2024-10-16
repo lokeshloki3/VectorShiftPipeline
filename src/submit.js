@@ -25,11 +25,11 @@ export const SubmitButton = () => {
     };
     
     const submissionDataString = JSON.stringify(submissionData);
-    // console.log("Submitted Data: ", submissionDataString);
+    console.log("Submitted Data: ", submissionDataString);
     
     // Send submissionData to an API endpoint or use it as needed.
     try {
-      const response = await fetch('https://d0d29c95-0c93-48ca-8424-ad4b9939facd.mock.pstmn.io/pipelines/parse', {
+      const response = await fetch('http://localhost:8000/pipelines/parse', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,13 +38,12 @@ export const SubmitButton = () => {
       });
 
       const data = await response.json();
-      console.log(data);
+      console.log(data)
       
       const { num_nodes, num_edges, is_dag } = data;
-      const alertMessage = `Number of Nodes: ${num_nodes}\nNumber of Edges: ${num_edges}\nIs Directed Acyclic Graph (DAG): ${is_dag}`;
-      alert(alertMessage);
-
+      alert(`Number of Nodes: ${num_nodes}\nNumber of Edges: ${num_edges}\nIs Directed Acyclic Graph (DAG): ${is_dag}`);
     } catch (error) {
+      alert('Backend not found');
       console.error('Error submitting data:', error);
     }
   };
